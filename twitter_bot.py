@@ -19,5 +19,5 @@ user = api.me()
 #print(user)
 
 for follower in tweepy.Cursor(api.followers).items():
-    print(follower.name, file=open("output.txt", "w"))
+    print(follower.name, file=open("output.txt", "w", encoding='utf-8'))
     

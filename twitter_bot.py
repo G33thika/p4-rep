@@ -17,9 +17,9 @@ api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
 
 #print(user)
-# file = open("output.txt", "w")
-# file.write("")
-# file.close()
+file = open("output.txt", "w")
+file.write("")
+file.close()
 
 for follower in tweepy.Cursor(api.followers).items():
     print(follower.name, file=open("output.txt", "a", encoding='utf-8'))

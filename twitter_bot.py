@@ -17,12 +17,7 @@ dbpass = environ['dbpass']
 host = environ['host']
 
 
-mydb = mysql.connector.connect(
-  host,
-  user,
-  dbpass,
-  db
-)
+mydb = mysql.connector.connect(host = host, user = user, password = dbpass, database= db)
 
 mycursor = mydb.cursor()
 

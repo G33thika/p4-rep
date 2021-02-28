@@ -2,7 +2,7 @@ import tweepy
 import time
 import os
 from os import environ
-import psycopg2
+import mysql.connector 
 
 
 
@@ -15,16 +15,16 @@ db = environ['db']
 user = environ['username']
 dbpass = environ['dbpass']
 host = environ['host']
-port = environ['port']
 
-conn = psycopg2.connect(
-    database=db, user=user, password=dbpass, host=host, port=port
+
+mydb = mysql.connector.connect(
+  host,
+  user,
+  dbpass,
+  db
 )
 
-
-conn.autocommit = True
-
-cursor = conn.cursor()
+mycursor = mydb.cursor()
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -40,9 +40,7 @@ for follower in tweepy.Cursor(api.followers).items():
     data = (follower.id , follower.name)
 
     try:
-        cursor.execute(query, data)
-        conn.commit()
+        mycursor.execute(query, data)
+        mydb.commit()
     except Exception as error:
         pass
-
-conn.close()
